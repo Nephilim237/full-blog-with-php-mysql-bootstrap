@@ -1,0 +1,28 @@
+//Fonts variables
+$ubuntu: "Ubuntu", sans-serif;
+$piazzo: "Piazzolla", serif;
+
+//Colors variables
+$main-color: #ffa400;
+$font-color: #495454;
+$blue-color: #00dafd;
+$sec-color: #7a7b7b;
+$white: #fff;
+$break-white: #eaf6ff;
+$black: #000;
+
+//Backgrounds color
+.bg-orange {
+  background-color: $main-color;
+  color: $break-white;
+}
+
+.border-orange {
+  border-color: $main-color !important;
+}
+
+//media queries variables
+$xs: 572px;
+$sm: 768px;
+$md: 992px;
+$lg: 1200px;

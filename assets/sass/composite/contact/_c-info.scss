@@ -1,0 +1,22 @@
+.c-info {
+    width: 33%;
+    flex: 0 0 33%;
+    @media (max-width: $md) {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .info-item {
+        margin-bottom: 1rem;
+        align-items: center;
+
+        h6 {
+            margin-bottom: 0;
+        }
+
+        p {
+            margin-bottom: 0;
+            color: #999999;
+        }
+    }
+}

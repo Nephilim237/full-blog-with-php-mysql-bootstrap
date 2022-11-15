@@ -1,0 +1,52 @@
+.banner {
+  padding: 12em 2em 8em 2em;
+  background: linear-gradient(to bottom, rgba(#000, .75) 75%, rgba(#fff, .4)), url("../imgs/banner/banner.jpg") no-repeat top;
+  background-size: cover;
+  text-align: center;
+  border-top: .5rem solid #ffa400;
+
+    &.single-banner {
+        -webkit-background-size: cover !important;
+        background-size: cover !important;
+        height: 200px;
+
+        .b-title {
+            margin-top: -5rem;
+            margin-bottom: 0;
+        }
+    }
+
+  .banner-wrapper {
+    width: 70%;
+    margin-top: -2.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1.5rem;
+    @media (max-width: $md) {
+      width: 90%;
+    }
+
+    .page-path {
+
+        a {
+            padding: .5rem 0;
+            margin-left: 1rem;
+            color: $break-white;
+            transition: .25s ease-in;
+            &:hover {
+                color: $main-color;
+            }
+        }
+    }
+
+    p {
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      @media (max-width: $md) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

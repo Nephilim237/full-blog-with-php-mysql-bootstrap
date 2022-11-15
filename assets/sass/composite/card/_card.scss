@@ -1,0 +1,50 @@
+.card {
+  .card-wrapper {
+    display: flex;
+
+    article {
+      margin-right: 1rem;
+      padding: 0 1rem 0 1.5rem;
+      border: 1px solid transparent;
+      border-right-color: transparentize($sec-color, .45);
+
+      &:last-child {
+        border-right-color: transparent;
+      }
+
+      header {
+        margin-bottom: 2rem;
+      }
+
+      h4 {
+        max-width: 75%;
+        font-family: $piazzo;
+        font-weight: 500;
+        color: $main-color;
+      }
+
+      p {
+        color: $sec-color;
+      }
+    }
+
+    @media (max-width: $md) {
+      flex-flow: column;
+
+      article {
+        margin-bottom: 1rem;
+        padding-bottom: 2rem;
+        border-right-color: transparent;
+        border-bottom-color: transparentize($sec-color, .85);
+
+        &:last-child {
+          border-bottom-color: transparent;
+        }
+
+        h4 {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}

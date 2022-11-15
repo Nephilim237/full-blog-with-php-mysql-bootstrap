@@ -1,0 +1,38 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@import "titles";
+
+@import "grid";
+
+@import "reset";
+
+@import "padding";
+
+@import "maring";
+
+@import "img";
+
+@import "form";
+
+.fas, .far, .fab, .fa {
+  margin: 0 .25rem;
+  vertical-align: middle;
+}
+
+
+
+//Predifined padding
+
+.bg-bw {
+  background-color: $break-white;
+}
+
+.t-center {
+    text-align: center !important;
+}
+
+.fw-300 {
+    font-weight: 300 !important;
+}

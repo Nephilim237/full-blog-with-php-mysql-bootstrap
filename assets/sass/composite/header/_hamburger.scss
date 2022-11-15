@@ -1,0 +1,25 @@
+.hamburger {
+  display: none;
+
+  @media (max-width: $md) {
+    display: block;
+    position: absolute;
+    font-size: 2rem;
+    color: $main-color;
+    right: 20px;
+    top: 10px;
+    padding: 0 .5rem;
+    border: 1px solid rgba(255, 164, 0, .05);
+    border-radius: .25rem;
+    transition: all .3s ease;
+    &:hover {
+      color: transparentize($main-color, .75);
+      border-color: transparentize($main-color, .65);
+    }
+
+    i {
+      vertical-align: initial;
+    }
+  }
+
+}

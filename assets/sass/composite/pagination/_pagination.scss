@@ -1,0 +1,36 @@
+.blog-pagination {
+  display: flex;
+  justify-content: center;
+
+  .cc-pagination {
+    display: flex;
+    justify-content: center;
+
+    .cc-page-item {
+      border: none;
+
+      .page-path {
+        position: relative;
+        display: block;
+        padding: .5rem .75rem;
+        color: $sec-color;
+        border: none;
+        transition: .3s ease;
+
+        &:hover, &.hover, &:active, &.active {
+          color: $break-white;
+          background-color: $main-color;
+          text-decoration: none;
+          border-color: transparentize($sec-color, .25);
+        }
+
+        &:disabled, &.disabled {
+          cursor: not-allowed;
+          background-color: transparent;
+          color: transparentize($sec-color, .45);
+        }
+
+      }
+    }
+  }
+}

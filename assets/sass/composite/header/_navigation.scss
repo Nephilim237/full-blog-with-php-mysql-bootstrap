@@ -1,0 +1,17 @@
+nav.navigation {
+  z-index: 99;
+
+  @media (max-width: $md) {
+    display: block;
+    position: absolute;
+    top: 80px;
+    left: -100%;
+    width: 100%;
+    height: 500px;
+    background-color: transparentize($black, .25);
+    visibility: hidden;
+    transition: transform .5s ease, visibility .5s ease;
+  }
+
+  @import "nav-links";
+}

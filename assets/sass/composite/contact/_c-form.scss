@@ -1,0 +1,27 @@
+.c-form {
+    width: 67%;
+    flex: 0 0 67%;
+    @media (max-width: $md) {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+
+    .left-form, .right-form {
+        width: 50%;
+        flex: 0 0 50%;
+        @media (max-width: $sm) {
+            width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+
+    textarea.cc-form-control {
+        height: 150px;
+        resize: none;
+    }
+
+    .button-col {
+        width: 100%;
+        text-align: right;
+    }
+}

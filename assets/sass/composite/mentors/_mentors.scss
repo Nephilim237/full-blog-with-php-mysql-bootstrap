@@ -1,0 +1,38 @@
+#mentors {
+  .mentors-wrapper {
+    .mentors-container {
+      .mentor-box {
+        width: 25%;
+        flex: 0 0 25%;
+
+        @media (max-width: $md) {
+          width: 50%;
+          flex: 0 0 50%;
+        }
+
+        @media (max-width: $sm) {
+          width: 90%;
+          flex: 0 0 90%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .box {
+        text-align: center;
+        border-radius: .25rem;
+        margin-bottom: 2rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        box-shadow: 1px 1px 3px rgba($main-color, .25), -1px -1px 3px rgba($main-color, .25);
+      }
+
+      .mentor-img {
+        width: 200px;
+        padding: 1rem;
+        margin: auto;
+        border-radius: 50%;
+      }
+    }
+  }
+}

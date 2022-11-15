@@ -1,0 +1,24 @@
+.nav-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 50%;
+
+  @media (max-width: $md) {
+    display: block;
+    max-width: 75%;
+    width: 400px;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 0;
+    padding-left: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: $main-color;
+    color: $white;
+  }
+
+  @import "nav-item";
+
+  @import "nav-item-submenu";
+}

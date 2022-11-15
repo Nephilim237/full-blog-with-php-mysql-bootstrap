@@ -1,0 +1,37 @@
+.cc-btn {
+  display: inline-block;
+  padding: .5rem 1rem;
+  background-color: $main-color;
+  color: $white;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  outline: none;
+  user-select: none;
+  text-decoration: none;
+  transition: all .3S ease;
+
+  &:hover, &:focus {
+    outline: none;
+    background-color: darken($main-color, 7%);
+    box-shadow: 2px 4px 8px rgba($black, .5);
+  }
+
+  &.cc-btn-mini {
+    font-size: 1rem;
+    padding: .25rem .5rem;
+  }
+
+  &.cc-btn-big {
+    padding: .75rem 1.5rem;
+  }
+
+  &.cc-btn-outline:hover, &.cc-btn-outline:focus {
+    background-color: transparent;
+    border-color: $main-color;
+    color: $main-color;
+      box-shadow: none;
+  }
+}

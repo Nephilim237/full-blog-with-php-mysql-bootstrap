@@ -1,0 +1,33 @@
+.blog-item {
+    display: flex;
+    margin-bottom: 4rem;
+
+    .blog-post {
+        width: 75%;
+        flex: 0 0 75%;
+        @media(max-width: $md) {
+            width: 100%;
+            flex: 0 0 100%;
+        }
+
+        .blog-details {
+            padding-top: 1rem;
+
+            h2 {
+                margin-bottom: 1rem;
+                color: $font-color;
+                transition: .3s ease;
+            }
+
+            a:hover {
+                h2 {
+                    color: $main-color;
+                }
+            }
+
+            p {
+                color: $sec-color;
+            }
+        }
+    }
+}

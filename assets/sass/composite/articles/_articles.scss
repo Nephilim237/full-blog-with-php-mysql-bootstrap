@@ -1,0 +1,31 @@
+#articles {
+
+  .articles-container {
+    article {
+      width: 50%;
+      flex: 0 0 50%;
+
+      @media (max-width: $md) {
+        width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid transparentize($main-color, .75);
+      }
+
+      header h4 {
+        font-weight: 400;
+        color: $main-color;
+      }
+
+      p {
+        color: $sec-color;
+        padding: 1rem 0;
+
+        @media (max-width: $md) {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

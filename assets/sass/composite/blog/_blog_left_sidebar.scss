@@ -1,0 +1,12 @@
+.blog-left-side {
+    width: 67%;
+    flex: 0 0 67%;
+
+    @media (max-width: $md) {
+        width: 100%;
+        flex: 0 0 100%;
+        margin-bottom: 2rem;
+    }
+
+    @import "blog_item";
+}

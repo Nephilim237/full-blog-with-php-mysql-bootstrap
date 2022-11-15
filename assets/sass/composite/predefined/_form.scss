@@ -1,0 +1,41 @@
+.cc-form-group {
+    margin-bottom: 1rem;
+}
+
+.cc-form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.cc-input-group {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.cc-form-control {
+    position: relative;
+    display: block;
+    line-height: 2;
+    height: calc(2.25rem + 2px);
+    outline: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    width: 100%;
+    padding: .375rem 1rem;
+    font-size: 1rem;
+    color: #999999;
+    border: 1px solid #999999;
+    transition: .25s ease;
+
+    &:hover, &:focus {
+        border-color: transparentize($main-color, .75);
+    }
+
+    &:focus {
+        box-shadow: 1px 1px 3px transparentize($main-color, .4);
+    }
+}

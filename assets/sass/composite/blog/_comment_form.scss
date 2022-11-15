@@ -1,0 +1,24 @@
+.comment-form {
+    margin-top: 50px;
+    margin-bottom: 40px;
+    padding: 45px 30px;
+    background-color: rgba(243, 252, 255, .54);
+    text-align: center;
+    border: 1px solid #eee;
+
+    h4 {
+        margin-bottom: 50px;
+        font-size: 1.2rem;
+    }
+
+    .cc-form-inline {
+        .cc-form-group {
+            width: 50%;
+            padding-right: 1rem;
+        }
+    }
+    textarea.cc-form-control {
+        height: auto;
+        resize: none;
+    }
+}

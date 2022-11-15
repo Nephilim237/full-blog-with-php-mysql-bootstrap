@@ -1,0 +1,17 @@
+.s-links {
+  ul {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  a {
+    padding: 1rem;
+    color: $sec-color;
+    transition: .3s ease;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+}

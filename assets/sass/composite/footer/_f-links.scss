@@ -1,0 +1,17 @@
+.f-links {
+  li {
+    margin-bottom: 1rem;
+
+    a {
+      padding: .5rem 0;
+      color: $sec-color;
+      border-bottom: 1px solid transparent;
+      transition: all .3s ease;
+
+      &:hover {
+        color: $main-color;
+        border-bottom-color: $main-color;
+      }
+    }
+  }
+}
