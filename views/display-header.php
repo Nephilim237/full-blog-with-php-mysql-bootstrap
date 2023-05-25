@@ -1,9 +1,10 @@
 <?php
 
-function display_header(string $title = 'Formation PHP', string $iconType = 'at') {
+function display_header(string $title = 'Formation PHP', string $iconType = 'at'): string
+{
 
     return <<<HTML
-        <section class="admin-header pt-70">
+        <section class="admin-header">
             <div class="border-top border-5 border-orange"></div>
             <div class="bg-dark text-light">
                 <div class="container">

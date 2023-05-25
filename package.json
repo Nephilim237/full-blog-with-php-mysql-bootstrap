@@ -1,0 +1,38 @@
+{
+  "name": "formation-php",
+  "version": "1.0.0",
+  "description": "Programme de formation pour debutant en PHP MySQL & Bootstrap - Creation d'un blog complet avec back-office et gestion des roles, des publiations et des commentaires",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "sass -w assets/sass:assets/stylesheets --update --style compressed ",
+    "stylelint-check": "stylelint-config-prettier-check"
+  },
+  "keywords": [
+    "Training",
+    "course",
+    "HTML",
+    "CSS",
+    "PHP",
+    "MySQL",
+    "Bootstrap",
+    "Bootstrap_5",
+    "PHP_8",
+    "HTML_5",
+    "CSS_3",
+    "SCSS",
+    "SASS"
+  ],
+  "author": "Coding City",
+  "license": "ISC",
+  "dependencies": {
+    "sass": "^1.56.1"
+  },
+  "devDependencies": {
+    "prettier-stylelint": "^0.4.2",
+    "stylelint": "^14.15.0",
+    "stylelint-config-prettier": "^9.0.4",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^6.1.0"
+  }
+}

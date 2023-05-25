@@ -1,5 +1,7 @@
-/assets/imgs/mentors
+/assets/img/mentors
 /.sass-cache
 /assets/.sass-cache
 /.idea
 /uploads
+/partials/.idea
+/node_modules

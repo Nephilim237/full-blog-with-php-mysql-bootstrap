@@ -14,12 +14,13 @@
             }
 
             section {
-                max-width: 800px;
+                max-width: 540px;
                 width: 100%;
                 font-size: 18px;
-                font-family: "Ubuntu", sans-serif;
+                font-family: sans-serif;
                 text-align: center;
-                box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
+                box-shadow: 2px 4px 8px rgba(255, 164, 0, 0.75);
+                padding: 70px;
             }
 
             h1 {
@@ -27,15 +28,16 @@
                 font-weight: 400;
                 text-align: center;
                 margin-bottom: 2rem;
-                font-family: "Piazzolla", serif;
+                font-family: serif;
                 color: #505556;
                 line-height: 2;
             }
 
-            p span {
-                font-size: 1.1em;
+            p  {
+                font-size: 16px;
                 font-weight: 400;
                 color: #505556;
+                line-height: 2;
             }
 
             strong, .copyright {

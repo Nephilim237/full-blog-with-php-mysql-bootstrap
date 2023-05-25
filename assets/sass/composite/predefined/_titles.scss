@@ -49,7 +49,8 @@ h6, .h6 {
 .b-title {
   font-family: $piazzo;
   color: #00dafd;
-  line-height: 2;
+  margin-bottom: 24px;
+  //line-height: 2;
 }
 
 .l4-title {
@@ -60,19 +61,19 @@ h6, .h6 {
 }
 
 .post-title {
-    font-family: $ubuntu;
-    font-weight: 400;
-    font-size: 1.6rem;
-    color: $sec-color;
+  font-family: $ubuntu;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: $sec-color;
 }
 
 .widget-title {
-    padding: 8px 0;
-    margin-bottom: 30px;
-    background-color: $main-color;
-    color: $white;
-    font-size: 18px;
-    line-height: 2;
+  padding: 8px 0;
+  margin-bottom: 30px;
+  background-color: $main-color;
+  color: $white;
+  font-size: 18px;
+  line-height: 2;
 }
 
 .section-header {

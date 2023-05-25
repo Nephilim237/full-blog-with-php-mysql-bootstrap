@@ -6,7 +6,106 @@ $param = "<span class='text-info'>" . ds_info('name') . ' ' . ds_info('firstname
 echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
 <section class="">
     <div class="row me-0">
-        <?php require_once 'singleViews/_profile_left.php' ?>
+        <div class="col-md-3">
+            <div class="d-flex flex-column p-3 text-white bg-dark h-100">
+                <div class="card bg-transparent border-0 rounded-0">
+                    <img src="<?= ds_info('image') ?? 'assets/img/default.png' ?>" class="card-img-top img-rounded w-50 mx-auto"
+                         alt="Image de profil par défaut">
+                    <div class="card-body px-0 text-center">
+                        <h5 class="card-title"><?= $param ?></h5>
+                        <h6 class="text-info mb-3"><?= ds_info('role') === 'super' ? 'Super Admin' : ds_info('role')?> </h6>
+                        <p class="profile-buttons d-flex justify-content-center">
+                            <a href="#" class="btn bg-orange mx-1 btn-sm">S'abonner</a>
+                            <a href="#" class="btn btn-light mx-1 btn-sm">Message</a>
+                        </p>
+                    </div>
+                    <div class="dropdown-divider border-orange"></div>
+
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item">
+                            <a href="index.php" class="nav-link text-white <?= set_active('index.php') ?>" aria-current="page">
+                                <i class="fas fa-home"></i>
+                                Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="admin.php" class="nav-link text-white <?= set_active('admin.php') ?>">
+                                <i class="fas fa-th-large"></i>
+                                Tableau de bord
+                            </a>
+                        </li>
+                        <li>
+                            <a href="post_list.php" class="nav-link text-white  <?= set_active('post_list.php') ?>">
+                                <i class="fas fa-heading"></i>
+                                Posts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="user_list.php" class="nav-link text-white  <?= set_active('user_list.php') ?>">
+                                <i class="fas fa-users"></i>
+                                Utilisateurs
+                            </a>
+                        </li>
+                        <li>
+                            <a href="category_list.php" class="nav-link text-white  <?= set_active('category_list.php') ?>">
+                                <i class="fas fa-tags"></i>
+                                Catégories
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="dropdown-divider border-orange"></div>
+
+                    <div class="card-body text-capitalize text-center row">
+                        <div class="col-sm-4">
+                            <div class="profile-stat-value">29</div>
+                            <div class="profile-stat-title">Posts</div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="profile-stat-value">126</div>
+                            <div class="profile-stat-title">Com</div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="profile-stat-value">53</div>
+                            <div class="profile-stat-title">Projets</div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-divider border-orange"></div>
+
+                    <div class="card-body">
+                        <h6 class="text-center text-info">A propos de <?= $param ?></h6>
+                        <p class="text-white-50"><?= decode_string(ds_info('bio')) ?></p>
+                    </div>
+                    <div class="dropdown-divider border-orange"></div>
+
+                    <div class="card-header text-center text-uppercase">
+                        <i class="fas fa-globe-africa"></i> Liens Importants
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item bg-transparent border-secondary border-bottom">
+                            <a href="#" class="text-light">
+                                <i class="fab fa-facebook-square"></i>
+                                Facebook
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-secondary border-bottom">
+                            <a href="#" class="text-light">
+                                <i class="fab fa-twitter"></i>
+                                Twitter
+                            </a>
+                        </li>
+                        <li class="list-group-item bg-transparent border-secondary border-bottom">
+                            <a href="#" class="text-light">
+                                <i class="fab fa-youtube"></i>
+                                YouTube
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="col-md-9 cc-profile-right">
             <div class="container-fluid py-3">
                 <?= display_session_alert(); ?>
@@ -14,7 +113,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                 <?= display_session_alert('info'); ?>
 
                 <div class="row mx-0">
-                    <div class="col-md-6">
+                    <div class="col-md-6 lh-lg">
                         <div class="col-12 border-bottom border-orange mb-3"><h1 class="piazzo text-center">
                                 Informations</h1></div>
                         <span class="object fs-6 fw-bold">Nom : </span> <span
@@ -30,7 +129,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                         <span class="object fs-6 fw-bold">Téléphone : </span> <span
                                 class="object-value fs-6"><?= ds_info('phone') ?></span><br>
                         <span class="object fs-6 fw-bold">Biographie : </span> <span
-                                class="object-value fs-6"><?= ds_info('bio') ?></span><br>
+                                class="object-value fs-6"><?= decode_string(ds_info('bio')) ?></span><br>
                         <form action="" method="post">
                             <button class="btn-link btn" name="update_profile">Mettre à jour le profil</button>
                             <button class="btn-link btn" name="update_password">Mettre à jour le mot de passe</button>

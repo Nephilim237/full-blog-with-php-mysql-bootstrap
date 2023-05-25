@@ -11,8 +11,8 @@ if (!super() && !admin() && !modo()) {
 
 $perPage = 10; //Nombre d'éléments à afficher par page
 
-$query = "SELECT * FROM user ";
-$queryCount = "SELECT COUNT(id) as count FROM user";
+$query = "SELECT u.id, u.name, u.firstname, u.email, u.role, u.created_at, ua.born_at, ua.gender, ua.adress, ua.phone, ua.image, ua.bio FROM user u JOIN user_add ua ON u.id = ua.user_id";
+$queryCount = "SELECT COUNT(u.id) as count FROM user u JOIN user_add ua ON u.id = ua.user_id";
 $params = [];
 
 //Gestion des paramètre de la recherche

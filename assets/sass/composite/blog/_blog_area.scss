@@ -7,10 +7,13 @@
         .post-elt {
             width: 67%;
             flex: 0 0 67%;
-            font-size: 15px;
+            //font-size: 15px;
             @media (max-width: $md) {
                 width: 100%;
                 flex: 0 0 100%;
+            }
+            .single-post {
+                text-align: justify;
             }
 
             .post-img {

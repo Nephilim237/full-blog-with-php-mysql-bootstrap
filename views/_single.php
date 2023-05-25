@@ -31,18 +31,19 @@ function display_banner_image($image): string
                     <div class="blog-info px-15">
                         <div class="post-tag">
                             <?php foreach ($categories as $category): ?>
-                                <a href="#" class="mb-1"><?= $category->title ?></a>
+                                <a href="#" class="mb-1"><span class="badge rounded-pill bg-orange"><?= $category->title ?></span></a>
                             <?php endforeach; ?>
                         </div>
                         <ul class="blog-meta">
                             <li class="author"><a href="#"><?= concatenate($post->name, $post->firstname) ?><i class="fas fa-user"></i></a></li>
                             <li class="date"><a href="#"><?= time_format($post->created_at) ?><i class="fas fa-calendar-alt"></i></a></li>
                             <li class="consulted"><a href="#">Consulté 2M de fois<i class="fas fa-eye"></i></a></li>
-                            <li class="comments"><a href="#">5069 Commentaires<i class="fas fa-comment"></i></a></li>
+                            <li class="comments"><a href="#"><?= format_plural(count($comments), "Commentaire") ?><i class="fas
+                            fa-comment"></i></a></li>
                         </ul>
                     </div>
 
-                    <div class="post-img px-15 mb-1">
+                    <div class="post-img px-15 mb-3">
                         <img src="<?= $post->post_image ?>" alt="<?= $post->title ?>" class="img">
                     </div>
 
@@ -50,131 +51,96 @@ function display_banner_image($image): string
                         <h2 class="post-title"><?= $post->title ?></h2>
                         <p><?= nl2br($post->content) ?></p>
                     </div>
-
-                    <div class="notice px-15 my-1">
-                        <div class="quote">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consectetur dignissimos ducimus, eaque eos,
-                            illo inventore maiores necessitatibus nesciunt odit quis unde ut vero voluptatem voluptates. Assumenda deserunt eius
-                            inventore?
-                        </div>
-                        <div class="notice-details row">
-                            <div class="notice-img px-15"><img src="assets/imgs/articles/post-1.jpg" alt="" class="img"></div>
-                            <div class="notice-img px-15"><img src="assets/imgs/articles/post-4.jpg" alt="" class="img"></div>
-                            <div class="notice-text px-15">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto asperiores at autem, commodi consequatur
-                                    fugit hic labore nam necessitatibus pariatur porro rem unde! Ad explicabo nemo porro suscipit tenetur.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet architecto asperiores at autem, commodi consequatur
-                                    fugit hic labore nam necessitatibus pariatur porro rem unde! Ad explicabo nemo porro suscipit tenetur.</p>
-                            </div>
-                        </div>
-                    </div>
                 </div><!-- End single post details -->
 
-                <div class="navigation-area px-15 row"><!-- Navigation begin -->
-                    <div class="nav-left px-15"><!-- Article précedent -->
-                        <div class="thumb mr-1">
-                            <a href="#"><img src="assets/imgs/mentors/m1.jpg" alt="" class="img"></a>
-                        </div>
-                        <div class="arrow"><a href="#"><i class="fas fa-arrow-left"></i></a></div>
-                        <div class="details">
-                            <p><small>Lorem ipsum.</small></p>
-                            <a href="#">
-                                <h4>Lorem ipsum dolor.</h4>
-                            </a>
-                        </div>
+                <div class="navigation-area px-15 row">
+                    <!-- Navigation begin -->
+                    <div class="nav-left px-15">
+                        <!-- Article précedent -->
+                        <?php if ($key > 0) : ?>
+                            <div class="thumb mr-1">
+                                <a href="single.php?id=<?= $prevPost->id ?>"><img src="<?= $prevPost->post_image ?>" alt="" class="img"></a>
+                            </div>
+                            <div class="arrow"><a href="single.php?id=<?= $prevPost->id ?>"><i class="fas fa-arrow-left"></i></a></div>
+                            <div class="details">
+                                <p><small>Article précédent.</small></p>
+                                <a href="single.php?id=<?= $prevPost->id ?>">
+                                    <h4><?= $prevPost->title ?></h4>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     </div><!-- Fin Article précedent -->
-                    <div class="nav-right px-15"><!-- Article suivant -->
-                        <div class="thumb ml-1">
-                            <a href="#"><img src="assets/imgs/mentors/m2.jpg" alt="" class="img"></a>
-                        </div>
-                        <div class="arrow"><a href="#"><i class="fas fa-arrow-right"></i></a></div>
-                        <div class="details">
-                            <p><small>Lorem ipsum.</small></p>
-                            <a href="#">
-                                <h4>Lorem ipsum dolor.</h4>
-                            </a>
-                        </div>
+                    <div class="nav-right px-15">
+                        <!-- Article suivant -->
+                        <?php if ($key < count($postsId) - 1) : ?>
+                            <div class="thumb ml-1">
+                                <a href="single.php?id=<?= $nextPost->id ?>"><img src="<?= $nextPost->post_image ?>" alt="" class="img"></a>
+                            </div>
+                            <div class="arrow"><a href="single.php?id=<?= $nextPost->id ?>"><i class="fas fa-arrow-right"></i></a></div>
+                            <div class="details">
+                                <p><small>Article suivant.</small></p>
+                                <a href="single.php?id=<?= $nextPost->id ?>">
+                                    <h4><?= $nextPost->title ?></h4>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     </div><!-- Fin Article suivant -->
                 </div><!-- End Navigation -->
 
-                <div class="comment-area px-15">
-                    <h4>03 Commentaires</h4>
-                    <div class="comment-row mb-1">
-                        <div class="single-comment row">
-                            <div class="thumb px-15">
-                                <img src="assets/imgs/mentors/m2.jpg" alt="" class="img">
-                            </div>
-                            <div class="desc px-15">
-                                <h5><a href="#">Coding City</a></h5>
-                                <div class="comment-options">
-                                    <p class="row">
-                                        <small class="date px-15">19 Dec 1978</small>
-                                        <small class="reply px-15">Répondre</small>
-                                    </p>
-                                    <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque consequuntur enim
-                                        mollitia sit.</p>
+                <div class="comment-area px-15" id="comment-area">
+                    <h4><?= format_plural(count($comments), 'Commentaire')?></h4>
+                    <?= display_session_alert(); ?>
+                    <?= display_session_alert('warning'); ?>
+                    <?php foreach ($comments as $comment) : ?>
+                        <div class="comment-row mb-1">
+                            <div class="single-comment row">
+                                <div class="thumb px-15">
+                                    <img src="<?= $comment->image ?>" alt="" width="40" class="img-rounded">
+                                </div>
+                                <div class="desc px-15">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <h5><a href="#"><?= $comment->name ?: '@Utilisateur' ?></a></h5>
+                                        <small class="date px-15"><?= time_format($comment->created_at) ?></small>
+                                    </div>
+                                    <div class="comment-options">
+                                        <p class="comment"><?= nl2br($comment->comment) ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="comment-row mb-1">
-                        <div class="single-comment row">
-                            <div class="thumb px-15">
-                                <img src="assets/imgs/mentors/m4.jpg" alt="" class="img">
-                            </div>
-                            <div class="desc px-15">
-                                <h5><a href="#">Coding City</a></h5>
-                                <div class="comment-options">
-                                    <p class="row">
-                                        <small class="date px-15">19 Dec 1978</small>
-                                        <small class="reply px-15">Répondre</small>
-                                    </p>
-                                    <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque consequuntur enim
-                                        mollitia sit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-row mb-1">
-                        <div class="single-comment row">
-                            <div class="thumb px-15">
-                                <img src="assets/imgs/mentors/m5.jpg" alt="" class="img">
-                            </div>
-                            <div class="desc px-15">
-                                <h5><a href="#">Coding City</a></h5>
-                                <div class="comment-options">
-                                    <p class="row">
-                                        <small class="date px-15">19 Dec 1978</small>
-                                        <small class="reply px-15">Répondre</small>
-                                    </p>
-                                    <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque consequuntur enim
-                                        mollitia sit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
 
                 <div class="comment-form px-15">
                     <h4>Laissez un commentaire</h4>
-                    <form>
+                    <form action="" method="post">
                         <div class="cc-form-group cc-form-inline">
                             <div class="cc-form-group">
-                                <input type="text" class="cc-form-control" placeholder="Votre nom">
+                                <input type="text" name="name" class="cc-form-control" placeholder="Votre nom"
+                                       value="<?= get_post_data($_POST, 'name') ?>">
+                                <?= display_errors($errors, 'name') ?>
                             </div>
                             <div class="cc-form-group">
-                                <input type="text" class="cc-form-control" placeholder="Votre prénom">
+                                <input type="text" name="firstname" class="cc-form-control" placeholder="Votre prénom"
+                                       value="<?= get_post_data($_POST, 'firstname') ?>">
+                                <?= display_errors($errors, 'firstname') ?>
                             </div>
                         </div>
 
                         <div class="cc-form-group">
-                            <input type="email" class="cc-form-control" placeholder="Votre email">
+                            <input type="email" name="email" class="cc-form-control" placeholder="Votre email"
+                                   value="<?= get_post_data($_POST, 'email') ?>">
+                            <?= display_errors($errors, 'email') ?>
                         </div>
 
                         <div class="cc-form-group">
-                            <textarea cols="30" rows="10" class="cc-form-control" placeholder="Votre message"></textarea>
+                            <textarea cols="30" rows="4" name="message" class="cc-form-control" placeholder="Votre message"><?= get_post_data
+                                ($_POST, 'name')
+                                ?></textarea>
+                            <?= display_errors($errors, 'message') ?>
                         </div>
 
-                        <button class="cc-btn cc-btn-outline">Commenter</button>
+                        <button class="cc-btn cc-btn-outline" type="submit" name="add_comment">Commenter</button>
                     </form>
                 </div>
 
@@ -185,22 +151,26 @@ function display_banner_image($image): string
                     <div class="cc-input-group">
                         <input type="text" class="cc-form-control" placeholder="Rechercher articles">
                         <span class="input-group-btn">
-                                    <button class="cc-btn btn-widget" type="button"><i class="fas fa-search"></i></button>
-                                </span>
+                            <button class="cc-btn btn-widget" type="button"><i class="fas fa-search"></i></button>
+                        </span>
                     </div>
                     <div class="br"></div>
                 </aside>
 
                 <aside class="single-sidebar-widget author-widget t-center fw-300">
-                    <img src="<?= $post->user_image ?>" alt="" class="author-img img-rounded">
-                    <h4><?= concatenate($post->firstname, $post->name) ?></h4>
+                    <div class="w-50 mx-auto">
+                        <img src="<?= $post->user_image ?>" alt="" class="author-img img-fluid img-rounded">
+                    </div>
+                    <h4><?= $post->name ?></h4>
                     <p><?= $post->role ?></p>
                     <div class="social-icon">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
+                        <?php if (count($userSocialLinks) > 0): ?>
+                            <?php foreach ($userSocialLinks as $socialLink): ?>
+                                <a href="<?= $socialLink->link ?>" target="_blank"><i class="fab fa-<?= $socialLink->name ?>"></i></a>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </div>
-                    <p><?= nl2br($post->bio) ?></p>
+                    <p><?= decode_string($post->bio)  ?></p>
                     <div class="br"></div>
                 </aside>
 

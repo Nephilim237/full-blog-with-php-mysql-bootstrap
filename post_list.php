@@ -14,8 +14,8 @@ if (!super() && !admin() && !modo()) {
     redirect_to('profile.php?id=' . ds_info('id'));
 }
 
-$posts = posts_with_search_query(10)[0];
-$totalPages = posts_with_search_query(10)[1];
+$posts = posts_with_search_query(10)[0] ?? null;
+$totalPages = posts_with_search_query(10)[1] ?? null;
 ?>
 
 <?php require_once 'views/_post_list.php'?>

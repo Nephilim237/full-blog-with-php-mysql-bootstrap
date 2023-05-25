@@ -2,6 +2,9 @@
     font-size: 1.1em;
     text-align: center;
     font-weight: 300;
+    & .intro {
+        text-align: justify;
+    }
 }
 
 .blog-category {

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fait le traitement nécessaire pour afficher la pagination. Prend en compte le nombre total de page, le paramètre de pagination et éventuellement le paramètr de recherche.
  *
@@ -17,7 +18,7 @@ function display_pagination(string $totalPages = '1'): ?string
 
     if ($page > 1) {
         $inPage = build_http_query(['p' => $page - 1]);
-        $disabledState = ($page > 1) ? '' : 'disabled';
+        $disabledState = $page ? '' : 'disabled';
         $pagination .= <<<HTML
             <li class="cc-page-item">
                 <a href="?$inPage" class="page-path $disabledState">
@@ -63,7 +64,7 @@ function display_pagination(string $totalPages = '1'): ?string
 
     if ($page < $totalPages) {
         $inPage = build_http_query(['p' => $page + 1]);
-        $disabledState = ($totalPages > 1) ? '' : 'disabled';
+        $disabledState = $totalPages ? '' : 'disabled';
         $pagination .= <<<HTML
             <li class="cc-page-item">
                 <a href="?$inPage" class="page-path  $disabledState">
@@ -84,9 +85,9 @@ function build_http_query(array $param): string
 function get_post_data(array $tableData, string $field, ?string $databaseValue = null): string
 {
     if (!isset($tableData[$field]) && !isset($databaseValue)) return '';
-    if (isset($databaseValue) && !isset($tableData[$field])) return htmlentities($databaseValue);
+    if (isset($databaseValue) && !isset($tableData[$field])) return html_entity_decode($databaseValue);
 
-    return htmlentities($tableData[$field]);
+    return html_entity_decode($tableData[$field]);
 }
 
 function get_get_data(array $tableData, string $field): string
@@ -96,17 +97,29 @@ function get_get_data(array $tableData, string $field): string
     return htmlentities($tableData[$field]);
 }
 
-function get_selected_tag(string $field, string $value): ?string
+function get_selected_tag(string $field, string $value, $databaseValue = []): ?string
 {
-    if (!isset($_POST[$field])) return null;
-    if (is_array($_POST[$field])) {
-        if (in_array($value, $_POST[$field], true)) {
+    $databaseTitles = [];
+    if (isset($_POST[$field])) {
+        if (is_array($_POST[$field])) {
+            if (in_array($value, $_POST[$field], true)) {
+                return 'selected';
+            }
+        } else if (is_string($_POST[$field]) && ($_POST[$field] === $value)) {
             return 'selected';
         }
-    } else if (is_string($_POST[$field]) && $_POST[$field] === $value) {
-        return 'selected';
     }
-
+    if (isset($databaseValue)) {
+        if (is_array($databaseValue)) {
+            foreach ($databaseValue as $dataValue)
+                $databaseTitles[] = $dataValue->title;
+            if (in_array($value, $databaseTitles))
+                return 'selected';
+        } else {
+            if ($databaseValue === $value)
+                return 'selected';
+        }
+    }
     return null;
 }
 
@@ -135,7 +148,7 @@ function length_validation(string $data, int $min, int $max): bool
     return true;
 }
 
-function sanitize($data)
+function sanitize($data): array|string
 {
     if (is_array($data)) {
         foreach ($data as $index => $datum) {
@@ -160,7 +173,7 @@ function display_errors(array $errorsArray, string $field): string
 
 }
 
-function var_dumping(...$args)
+function var_dumping(...$args): void
 {
     echo '<div class="py-70">';
     foreach ($args as $arg):
@@ -176,8 +189,21 @@ function var_dumping(...$args)
  */
 function time_format($stringTime): string
 {
+    $formtater = datefmt_create(
+        'fr_FR',
+        IntlDateFormatter::MEDIUM,
+        IntlDateFormatter::SHORT,
+        'Africa/Douala',
+        IntlDateFormatter::GREGORIAN
+    );
     $date = new DateTime($stringTime);
-    return $date->format('d-M-Y à H:i');
+    return datefmt_format($formtater, $date);
+}
+
+function format_plural(int $nbData, string $dataToFormat): bool|string
+{
+    if ($nbData > 1) $dataToFormat = $dataToFormat . "s";
+    return $nbData > 9 ?: '0' . $nbData . ' '. $dataToFormat;
 }
 
 function concatenate($param1, $param2): string
@@ -185,8 +211,22 @@ function concatenate($param1, $param2): string
     return $param1 . ' ' . $param2;
 }
 
-function redirect_to(string $path)
+function excerpt(string $content, int $start, int $limit): string
 {
-    header('Location:' . $path);
+    return nl2br(mb_substr($content, $start, $limit)) . '...';
+}
+
+function decode_string(string $givenString = null): string
+{
+    return $outputString = $givenString === null ? '' : html_entity_decode($givenString);
+}
+
+/**
+ * @param string $path
+ * @return void
+ */
+function redirect_to(string $path): void
+{
+    header('location: '. $path);
     exit();
 }

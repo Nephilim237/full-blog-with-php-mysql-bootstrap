@@ -27,7 +27,6 @@ CREATE TABLE `post` (
   FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 DROP TABLE IF EXISTS `post_category`;
 CREATE TABLE `post_category` (
   `post_id` int(11) NOT NULL,
@@ -37,7 +36,6 @@ CREATE TABLE `post_category` (
   FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
   FOREIGN KEY (`category_id`) REFERENCES `category` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -63,7 +61,7 @@ CREATE TABLE `user_add` (
   `gender` enum('male','female') DEFAULT NULL,
   `adress` varchar(255) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT 'assets/imgs/default.png',
+  `image` varchar(255) DEFAULT 'assets/img/default.png',
   `other` tinytext DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -71,6 +69,6 @@ CREATE TABLE `user_add` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `user_add` (`id`, `born_at`, `gender`, `adress`, `phone`, `image`, `other`, `user_id`) VALUES
-(3,	NULL,	NULL,	NULL,	NULL,	'assets/imgs/default.png',	NULL,	6);
+(3,	NULL,	NULL,	NULL,	NULL,	'assets/img/default.png',	NULL,	6);
 
 -- 2021-05-17 22:19:53

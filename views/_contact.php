@@ -12,7 +12,7 @@
 </section> <!-- End banner section -->
 
 <!-- Contact info section -->
-<section class="contact-info row py-70" id="contact-info">
+<section class="contact-info d-flex py-70" id="contact-info">
     <div class="container">
         <div class="contact-wrapper row">
             <div class="c-info px-15">

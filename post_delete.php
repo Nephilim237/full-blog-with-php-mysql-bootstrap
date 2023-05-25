@@ -25,9 +25,8 @@ $success = $db->commit();
 
 if ($success) {
     $_SESSION['success'] = "Article #$id supprimée avec succès";
-    redirect_to('post_list.php');
 } else {
     $_SESSION['warning'] = "Erreur lors de la suppression de l'article #$id";
-    redirect_to('post_list.php');
 }
+redirect_to('post_list.php');
 

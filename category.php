@@ -1,4 +1,5 @@
 <?php
+
 $title = 'Ajouter une catégorie.';
 require_once 'partials/_header.php';
 
@@ -15,7 +16,7 @@ if (isset($_POST['add_category'])) {
 
     if (!not_empty($category)) {
         $errors['category'] = 'Ce champ est obligatoire.';
-    } else if (!length_validation($category, 3, 245)) {
+    } else if (!length_validation($category, 2, 245)) {
         $errors['category'] = 'Doit être compris entre 3 et 245 caractères.';
     }
 
@@ -41,8 +42,10 @@ if (isset($_POST['add_category'])) {
         }
         $total = $db->lastInsertId();
         if ($db->commit()) {
-            $_SESSION['success'] = "Catégorie(s) insérée(s) avec succès. Vous en avez $total au total";
-            redirect_to('category_list.php');
+            $_SESSION['success'] = "Catégorie(s) insérée(s) avec succès.";
+            header('location: category_list.php');
+            die();
+//            redirect_to('category_list.php');
         } else {
             $_SESSION['warning'] = "Echec lors de l'ajout d'une ou de plusieurs Catégories.";
         }

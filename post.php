@@ -10,8 +10,9 @@ if (!super() && !admin() && !modo()) {
 }
 
 $categories = get_all_data('category', 'id', 100);
-foreach ($categories as $index => $category) {
-    $categories[$index] = $category->title;
+$assocCategoriesIdName = [];
+foreach ($categories as $category) {
+    $assocCategoriesIdName[$category->id] = $category->title;
 }
 
 $errors = [];
@@ -23,7 +24,6 @@ if (isset($_POST['post'])) {
     $category = $_POST['category'] ?? [];
     $content = $_POST['content'];
 
-
     if (!not_empty($title)) {
         $errors['title'] = 'Champ obligatoire';
     } else if (!length_validation($title, 3, 250)) {
@@ -34,7 +34,7 @@ if (isset($_POST['post'])) {
 
     }
     foreach ($category as $uniqueCategory) {
-        if (!in_array($uniqueCategory, $categories)) {
+        if (!in_array($uniqueCategory, $assocCategoriesIdName)) {
             $errors['category'] = 'Au moins l\'une des catégorie est erronée';
         }
     }
@@ -73,9 +73,9 @@ if (isset($_POST['post'])) {
         ]);
         $post_id = $db->lastInsertId();
         foreach ($category as $index => $item) {
-            if (in_array($item, $categories)) {
+            if (in_array($item, $assocCategoriesIdName)) {
 //            array_keys($categories, $item, true);
-                $key = array_search($item, $categories) + 1;
+                $key = array_search($item, $assocCategoriesIdName);
             }
             $q = $db->prepare("INSERT INTO post_category (post_id, category_id) VALUES (:post_id, :category_id)");
             $q->execute([

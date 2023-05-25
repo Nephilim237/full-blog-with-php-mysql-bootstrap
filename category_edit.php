@@ -13,9 +13,7 @@ if (!isset($_GET['id']) || (int)$_GET['id'] <= 0) {
 $id = (int)$_GET['id'];
 
 $errors = [];
-$q = $db->prepare("SELECT * FROM category WHERE id = :id");
-$q->execute(['id' => $id]);
-$currentCategory = $q->fetch(PDO::FETCH_OBJ);
+$currentCategory = get_single_data('category', $id);
 if (!$currentCategory) {
     $_SESSION['warning'] = "Erreur de processus.";
     redirect_to('category_list.php');

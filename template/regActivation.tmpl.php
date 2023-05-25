@@ -14,12 +14,12 @@
             }
 
             section {
-                max-width: 800px;
+                max-width: 540px;
                 width: 100%;
                 font-size: 18px;
-                font-family: "Ubuntu", sans-serif;
+                font-family: inherit;
                 text-align: center;
-                box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.15);
+                box-shadow: 2px 4px 8px rgba(255, 164, 0, 0.75);
                 padding: 70px;
             }
 
@@ -28,15 +28,14 @@
                 font-weight: 400;
                 text-align: center;
                 margin-bottom: 2rem;
-                font-family: "Piazzolla", serif;
                 color: #34393c;
-                line-height: 2;
             }
 
-            p span {
+            p {
                 font-size: 1.1em;
                 font-weight: 400;
                 color: #34393c;
+                line-height: 2;
             }
 
             strong, .copyright {
@@ -54,7 +53,7 @@
                 Pour finaliser votre inscription, veuillez cliquer sur ce <a href="<?= WEBSITE_URL.'/activation.php?n='.$name.'&e='.$email.'&t='
                 .$token ?>">lien</a>. <br>
                 <br>
-                Nous accordons de l'importance à votre personne et à votre oeuvre. <br>
+                Nous accordons de l'importance à votre personne et à votre œuvre. <br>
                 Cordialement
             </p>
             <div class="copyright"> &copy; | <?= WEBSITE_NAME ?> <?= date('Y') ?> tous droits reservés.</div>

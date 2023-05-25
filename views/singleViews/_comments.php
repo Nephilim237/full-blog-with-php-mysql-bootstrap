@@ -8,7 +8,7 @@
         <div class="comment-row mb-1">
             <div class="single-comment row">
                 <div class="thumb px-15">
-                    <img src="<?= $comment->image ?>" alt="" class="img">
+                    <img src="<?= $comment->image ?>" alt="" class="img-fluid img-rounded">
                 </div>
                 <div class="desc px-15">
                     <h5><a href="#"><?= concatenate($comment->firstname, $comment->name) ?></a></h5>

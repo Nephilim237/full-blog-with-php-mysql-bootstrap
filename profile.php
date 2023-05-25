@@ -23,10 +23,11 @@ if (isset($_POST['update_user'])) {
     $_POST = sanitize($_POST);
     extract($_POST);
     $bornTimestamp = strtotime($born_at);
-    if (!$bornTimestamp) {
-        $errors['born_at'] = 'Date invalide';
-    } else {
+    if ($bornTimestamp != '') {
+//        $errors['born_at'] = 'Date invalide';
         $formatDate =  date('Y-m-d',  $bornTimestamp);
+    }else {
+        $formatDate = null;
     }
     if (!empty($_FILES['image']['name'])) {
         if ($_FILES['image']['error'] === 0) {
@@ -71,7 +72,6 @@ if (isset($_POST['update_user'])) {
                 $_SESSION[$index] = $info;
             }
             $_SESSION['info'] = 'Profil mis à jour avec succès.';
-            $profileForm = false;
             redirect_to('profile.php?id=' . ds_info('id'));
         } else {
             $_SESSION['warning'] = 'Echec lors de la mise à jour';
@@ -108,7 +108,6 @@ if (isset($_POST['change_password'])) {
         ]);
         if ($success) {
             $_SESSION['info'] = 'Mot de passe mis à jour avec succès';
-            $passwordForm = false;
             redirect_to('profile.php?id=' . ds_info('id'));
         }else {
             $_SESSION['warning'] = 'Echec lors de la mise à jour du mot de passe';

@@ -1,7 +1,11 @@
 <?php
+require_once 'includes/db.php';
+require_once 'includes/session_functions.php';
+require_once 'includes/functions.php';
+
 
 if (!super()) {
-    $_SESSION['info'] = "Accès refusé";
+    $_SESSION['warning'] = "Accès refusé";
     redirect_to('user_list.php');
 }
 
@@ -23,8 +27,7 @@ $success = $db->commit();
 
 if ($success) {
     $_SESSION['success'] = "Utilisateur #$id supprimé avec succès";
-    redirect_to('user_list.php');
 } else {
     $_SESSION['warning'] = "Erreur lors de la suppression";
-    redirect_to('user_list.php');
 }
+redirect_to('user_list.php');

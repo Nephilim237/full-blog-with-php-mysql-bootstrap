@@ -15,14 +15,14 @@ $query = "SELECT c.id, title, c.created_at, user_id, name, firstname, email FROM
 $queryCount = "SELECT COUNT(c.id) as count FROM category c JOIN user u ON c.user_id = u.id";
 $params = [];
 
-//Gestion des paramètre de la recherche
+//Gestion des paramètres de la recherche
 if (!empty($_GET['q'])) {
     $query .= " WHERE title LIKE :q OR name LIKE :q OR firstname LIKE :q";
     $queryCount .= " WHERE title LIKE :q OR name LIKE :q OR firstname LIKE :q";
     $params['q'] = "%{$_GET['q']}%";
 }
 
-//Gestion des paramètre de la pagination
+//Gestion des paramètres de la pagination
 $page = (int)($_GET['p'] ?? 1);
 $offset = ($page - 1) * $perPage;
 
@@ -35,7 +35,7 @@ $categories = $q->fetchAll(PDO::FETCH_OBJ);
 $q = $db->prepare($queryCount);
 $q->execute($params);
 $totalElements = (int)$q->fetch()['count']; //Nombre Total des éléments provenant de la bdd
-$totalPages = ceil($totalElements / $perPage); //Nombre total de page sur lesquelles tout les éléments seront afficher
+$totalPages = ceil($totalElements / $perPage); //Nombre total de page sur lesquelles tous les éléments seront afficher
 
 ?>
 

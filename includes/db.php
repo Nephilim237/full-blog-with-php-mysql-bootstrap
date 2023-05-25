@@ -8,7 +8,7 @@ const DEFAULT_PROFILE_PIC = 'default.png';
 
 $host = 'mysql:dbname=php';
 $user = 'root';
-$password = 'root';
+$password = '';
 
 try {
     $db = new PDO($host, $user, $password);
@@ -18,8 +18,50 @@ try {
 }
 
 
+function count_data_table(string $table)
+{
+    global $db;
+    return $db->query("SELECT COUNT(id) FROM $table")->fetch()["COUNT(id)"];
+}
 
-function get_all_data(string $table, $order = 'id', $limit = 10)
+function count_active_user() {
+    global $db;
+    return $db->query("SELECT COUNT(id) FROM user WHERE active = '1'")->fetch()["COUNT(id)"];
+}
+
+function count_role_user(string $role) {
+    global $db;
+    $q =  $db->prepare("SELECT COUNT(id) FROM user WHERE active = '1' AND role = :role");
+    $q->execute(['role'  => $role]);
+    return $q->fetch()["COUNT(id)"];
+}
+
+function get_social_links($condition, $conditionValue): bool|array
+{
+    global $db;
+    $q = $db->prepare("SELECT * FROM social_links WHERE $condition = :condition");
+    $q->execute(['condition' => $conditionValue]);
+
+    return $q->fetchAll(PDO::FETCH_OBJ);
+}
+
+function get_owner()
+{
+    global $db;
+    return $db->query("SELECT u.id, u.name, u.firstname, u.role, u.email, ua.image, ua.bio FROM user u JOIN user_add ua WHERE u.owner = '1'")
+        ->fetch(PDO::FETCH_OBJ);
+}
+
+function get_latest_posts($limit = 2): bool|array
+{
+    global $db;
+    $q = $db->prepare("SELECT * FROM post ORDER BY created_at DESC LIMIT $limit");
+    $q->execute();
+
+    return $q->fetchAll(PDO::FETCH_OBJ);
+}
+
+function get_all_data(string $table, $order = 'id', $limit = 10): bool|array
 {
     global $db;
     $q = $db->prepare("SELECT * FROM $table ORDER BY $order DESC LIMIT $limit");
@@ -27,7 +69,14 @@ function get_all_data(string $table, $order = 'id', $limit = 10)
     return $q->fetchAll(PDO::FETCH_OBJ);
 }
 
-function get_single_data(string $table, $id)
+/**
+ * Récupère toutes les informations d'un seul élément dans une table en base de données.
+ * Retour : Renvoie un objet contenant les informations demandées ou false
+ * @param string $table
+ * @param $id
+ * @return mixed
+ */
+function get_single_data(string $table, $id): mixed
 {
     global $db;
     $q = $db->prepare("SELECT * FROM $table WHERE id = :id");
@@ -38,12 +87,18 @@ function get_single_data(string $table, $id)
 function get_single_join_post($id)
 {
     global $db;
-    $q = $db->prepare("SELECT p.id, title, content, p.image post_image, p.created_at, u.name, u.firstname, u.role, ua.bio, ua.image user_image FROM post p LEFT JOIN user u ON p.user_id = u.id LEFT JOIN user_add ua on u.id = ua.user_id WHERE p.id = :id");
+    $q = $db->prepare("SELECT p.id, title, content, p.image post_image, p.created_at, u.id as user_id, u.name, u.firstname, u.role, ua.bio, ua.image user_image FROM post p LEFT JOIN user u ON p.user_id = u.id LEFT JOIN user_add ua on u.id = ua.user_id WHERE p.id = :id");
     $q->execute(['id' => $id]);
     return $q->fetch(PDO::FETCH_OBJ);
 }
 
-function get_categories_for_articles(int $id)
+/**
+ * Récupère les catégories associées à un article
+ * Renvoie false si aucune correspondance n'est trouvée
+ * @param int $id L'article pour lequel on souhaite recupérer les catégories
+ * @return bool|array Renvoie un tableau d'objet contenant toutes les catégories d'un post
+ */
+function get_categories_for_articles(int $id): bool|array
 {
     global $db;
     $q = $db->prepare("SELECT title FROM post_category pc JOIN category c ON pc.category_id = c.id WHERE pc.post_id = :id");
@@ -52,12 +107,21 @@ function get_categories_for_articles(int $id)
     return $q->fetchAll(PDO::FETCH_OBJ);
 }
 
+function get_comments_for_article(int $id): bool|array
+{
+    global $db;
+    $q = $db->prepare("SELECT c.id, name, firstname, comment, c.image, c.created_at FROM comment c left JOIN post p on c.post_id = p.id WHERE  c.post_id = :id ORDER BY  c.created_at DESC");
+    $q->execute(['id' => $id]);
+
+    return $q->fetchAll(PDO::FETCH_OBJ);
+}
+
 
 /**
- * Permet de recupérer les articles dans la table artcile tout en récupérant les information sur l'auteur de l'article
+ * Permet de recupérer les articles dans la table artcile tout en récupérant les informations sur l'auteur de l'article
  * Prend également en compte le facteur recherche.
- * La recherche ne prend en compte que le nom, le prénom de l'auteur et aussi le titre de l'article
- * @param int $perPage Nombre d'élements qu'on aimerai afficher sur une page
+ * La recherche ne prend en compte que le nom, le prénom de l'auteur et aussi le titre de l'article.
+ * @param int $perPage Nombre d'élements qu'on aimerait afficher sur une page
  *
  * @return array|null Renvoie un tableau contenant en première valeur le nombre d'artcile et en deuxième valeur
  *                    le nombre total des pages sur lesquelles nos articles s'étendront
@@ -76,14 +140,14 @@ function posts_with_search_query(int $perPage = 2): ?array
             ON p.user_id = u.id";
     $params = [];
 
-    //Gestion des paramètre de la recherche
+    //Gestion des paramètres de la recherche
     if (!empty($_GET['q'])) {
         $query .= " WHERE p.title LIKE :q OR name LIKE :q OR firstname LIKE :q";
         $queryCount .= " WHERE p.title LIKE :q OR name LIKE :q OR firstname LIKE :q";
         $params['q'] = "%{$_GET['q']}%";
     }
 
-    //Gestion des paramètre de la pagination
+    //Gestion des paramètres de la pagination
     $page = (int)($_GET['p'] ?? 1);
     $offset = ($page - 1) * $perPage;
 
@@ -96,9 +160,11 @@ function posts_with_search_query(int $perPage = 2): ?array
     $q = $db->prepare($queryCount);
     $q->execute($params);
     $totalElements = (int)$q->fetch()['count']; //Nombre Total des éléments provenant de la bdd
-    $totalPages = ceil($totalElements / $perPage); //Nombre total de page sur lesquelles tout les éléments seront afficher
+    $totalPages = ceil($totalElements / $perPage); //Nombre total de page sur lesquelles tous les éléments seront afficher
 
     if (count($posts) > 0) return [$posts, $totalPages];
 
     return null;
 }
+
+
